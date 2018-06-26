@@ -13,5 +13,9 @@
 function haveSameItems(array $arr1, array $arr2)
 {
     // Ваш код
-    return true;
+    if(count($arr1) !== count($arr2))
+    {
+        return false;
+    }
+    return empty(array_diff($arr1, $arr2)) ? true : false;
 }

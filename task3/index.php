@@ -6,6 +6,9 @@ class Emitter
      * Создает экземпляр класса Emitter.
      * @memberof Emitter
      */
+
+    public $events = [];
+
     public function constructor()
     {
         // Ваш код
@@ -20,6 +23,11 @@ class Emitter
     public function on($event, $handler)
     {
         // Ваш код
+        if(empty($this->events[$event]))
+        {
+            $this->events[$event] = [];
+        }
+        $this->events[$event][] = $handler;
     }
 
     /**
@@ -32,5 +40,10 @@ class Emitter
     public function emit($event, $data)
     {
         // Ваш код
+        if (!empty($this->events[$event])) {
+            foreach ($this->events[$event] as $event) {
+                $event($data);
+            }
+        }
     }
 }
